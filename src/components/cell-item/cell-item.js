@@ -4,7 +4,7 @@ import './cell-item.css'
 const CellItem = (props) => {
 
     return(
-        <div  className="cell-item"></div>
+        <div id={props.id} className="cell-item"></div>
     );
 }
 
