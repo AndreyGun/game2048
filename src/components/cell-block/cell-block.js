@@ -3,27 +3,19 @@ import CellItem from '../cell-item/cell-item';
 import './cell-block.css';
 
 const CellBlock = ({cellProps}) => {
-    const { cellCount } = cellProps;
 
+    const { cellCount, activeCells } = cellProps;
+    
+    console.log(activeCells);
     const cellItemList = Array.from(Array(cellCount).keys()).map((item) => {
         return(
-            <CellItem key={item + 1} id={item + 1}/>
+            <div className='cell-item-holder' key={item + 1} id={item + 1}>
+                <CellItem cellProps={cellProps} item={item + 1}/>
+            </div>
         )
     });
-    const setStartCells = (cellCount) => {
-        let cellArr = [];
-        for (let cell = 0; cell < cellProps.startingNumber; cell++) {
-            let activeCell = Math.floor(Math.random()*10) + 1;
-            if ( cellArr.includes(activeCell) ) {
-                cell--;
-            } else {
-                cellArr.push(activeCell);
-            }
-        }
-        return cellArr;
-    }
-    setStartCells();
-    console.log(cellItemList);
+    
+    
     return(
         <div className='cell-block'>
             {cellItemList}
