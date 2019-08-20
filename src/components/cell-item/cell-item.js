@@ -4,13 +4,17 @@ import './cell-item.css'
 const CellItem = (props) => {
 
     const { cellProps, activeItem, value } = props;
-    
+    let itemValue = null;
     let cellClass = 'cell-item';
     if (cellProps.activeCells.includes(activeItem)) {
-        cellClass += ' value-' + value
+        cellClass += ' is-active value-' + value;
+        itemValue = value;
     }
     return(
-        <div id={cellProps.id} className={cellClass}></div>
+        <div 
+            className={cellClass}>
+            {itemValue}
+        </div>
     );
 }
 

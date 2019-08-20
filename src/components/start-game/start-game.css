@@ -1,0 +1,13 @@
+.start-game-btn {
+    display: block;
+    padding: 5px 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    background: rgb(61, 167, 131);
+    border: 1px solid aquamarine;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 15px auto;
+    color: #fff;
+    box-shadow: 0 0 20px 10px aquamarine;
+}

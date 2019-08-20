@@ -12,6 +12,9 @@
     color: #fff;
     border-radius: 5px;
 }
+.is-active {
+    cursor: pointer;
+}
 .value-2 {
     font-size: 20px;
     background: purple;

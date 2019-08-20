@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CellBlock from '../cell-block';
 import GameTitle from '../game-title';
+import StartGame from '../start-game';
 import './app.css';
 
 
@@ -43,17 +44,17 @@ export default class App  extends Component {
     });
     this.setActiveCells();
   };
-
+    
   render() {
+
+    const renderedComponent = this.state.start ? 
+      <CellBlock cellProps={this.state}/> :
+      <StartGame startNewGame={this.startNewGame}/>;
+
     return (
       <div>
         <GameTitle />
-        <CellBlock cellProps={this.state}/>
-        <button 
-          className='start'
-          onClick={this.startNewGame}>
-          Start
-        </button>
+        {renderedComponent}
       </div>
     );
   };
