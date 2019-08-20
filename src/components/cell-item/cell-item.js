@@ -1,12 +1,13 @@
 import React from 'react';
 import './cell-item.css'
 
-const CellItem = ({cellProps}) => {
-    console.log(cellProps)
+const CellItem = (props) => {
 
+    const { cellProps, activeItem, value } = props;
+    
     let cellClass = 'cell-item';
-    if (cellProps.activeCell) {
-        cellClass += 'value-' + cellProps.cellValue
+    if (cellProps.activeCells.includes(activeItem)) {
+        cellClass += ' value-' + value
     }
     return(
         <div id={cellProps.id} className={cellClass}></div>

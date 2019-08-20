@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import CellBlock from '../cell-block'
+import CellBlock from '../cell-block';
+import GameTitle from '../game-title';
 import './app.css';
 
 
@@ -46,6 +47,7 @@ export default class App  extends Component {
   render() {
     return (
       <div>
+        <GameTitle />
         <CellBlock cellProps={this.state}/>
         <button 
           className='start'

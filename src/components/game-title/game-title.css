@@ -1,0 +1,9 @@
+.game-title {
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    color: orange;
+}
+.game-title span {
+    color: orangered;
+}

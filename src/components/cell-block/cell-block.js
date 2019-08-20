@@ -9,8 +9,13 @@ const CellBlock = ({cellProps}) => {
     console.log(activeCells);
     const cellItemList = Array.from(Array(cellCount).keys()).map((item) => {
         return(
-            <div className='cell-item-holder' key={item + 1} id={item + 1}>
-                <CellItem cellProps={cellProps} item={item + 1}/>
+            <div 
+                className='cell-item-holder'
+                key={item + 1}>
+                <CellItem 
+                    cellProps={cellProps}
+                    activeItem={item + 1}
+                    value={2}/>
             </div>
         )
     });
