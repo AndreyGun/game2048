@@ -2,20 +2,27 @@ import React from 'react'
 import CellItem from '../cell-item/cell-item';
 import './cell-block.css';
 
-const CellBlock = ({cellProps}) => {
+const CellBlock = ({cellProps, setCellState}) => {
 
-    const { cellCount, activeCells } = cellProps;
+    const { cells, activeCells } = cellProps;
     
-    console.log(activeCells);
-    const cellItemList = Array.from(Array(cellCount).keys()).map((item) => {
+    console.log(cellProps);
+    const cellItemList = cells.map((cell) => {
+        let cellId =  cell.id;
+        if (activeCells.includes(cellId)) {
+            console.log('true');
+            //setValue();
+        }
+        //console.log(item.id)
         return(
             <div 
                 className='cell-item-holder'
-                key={item + 1}>
+                key={cellId}>
                 <CellItem 
                     cellProps={cellProps}
-                    activeItem={item + 1}
-                    value={2}/>
+                    activeItem={cellId}
+                    value={2}
+                    setCellState={() => setCellState(cellId)}/>
             </div>
         )
     });

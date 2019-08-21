@@ -13,9 +13,12 @@
     border-radius: 5px;
 }
 .is-active {
+    font-family: monospace;
+    font-weight: bold;
+    line-height: 1;
     cursor: pointer;
 }
 .value-2 {
-    font-size: 20px;
+    font-size: 30px;
     background: purple;
 }
