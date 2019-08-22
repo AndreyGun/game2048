@@ -59,8 +59,6 @@ export default class App  extends Component {
       return cells;
     });
 
-    //console.log(cells);
-
     this.setState((state) => {
       return {
         start: true,
