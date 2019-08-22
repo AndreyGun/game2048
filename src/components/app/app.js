@@ -6,78 +6,73 @@ import './app.css';
 
 
 export default class App  extends Component {
-
-  startActiveCells = 2;
-  fieldSize = 16;
-  id = 1;
+  
+  startedId = 1;
+  startedValue = 2;
 
   state = {
-    cellValues: [
-      2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048
-    ],
-    activeCellCount: this.startActiveCells,
-    activeCells: [],
-    cellCount: 0,
+    cellCount: 16,
+    activeCellCount: 2,
     start: false,
-    cells: [
-      this.createCell(null), this.createCell(null), this.createCell(null), this.createCell(null),
-      this.createCell(null), this.createCell(null), this.createCell(null), this.createCell(null),
-      this.createCell(null), this.createCell(null), this.createCell(null), this.createCell(null),
-      this.createCell(null), this.createCell(null), this.createCell(null), this.createCell(null)
-    ]
+    cells: []
   }
-  createCell(value) {
+  createCell(row, column) {
     return {
-      value: value,
-      id: this.id++
+      value: null,
+      id: this.startedId++,
+      row: row,
+      column: column
     }
   }
-  updateValue(arr, id, value) {
-    const idx = arr.findIndex( (el) => el.id === id );
+  generateCells() {
+    const cells = [];
+    const length = 4;
+    let row = 1;
+    let column = 0;
+    for ( let cell = 0; cell < this.state.cellCount; cell++ ) {
+      column++
+      if (column > length) {column = 1; row++;}
 
-    const oldItem = arr[idx];
-    const newItem = {...oldItem, value: value}
-
-    return [
-      ...arr.slice(0, idx),
-      newItem,
-      ...arr.slice(idx + 1)
-    ]
-  };
-  setValue = (id, value) => {
-    this.setState(({ cells }) => {
-      return {
-        cells: this.updateValue(cells, id, value)
-      }
-    });
+      cells.push(this.createCell(row, column));
+    }
+    return cells;
   }
-  setActiveCells = () => {
-      let cellArr = [];
-      for (let cell = 0; cell < this.state.activeCellCount; cell++) {
-          let activeCell = Math.floor(Math.random()*10) + 1;
-          if ( cellArr.includes(activeCell) ) {
-              cell--;
-          } else {
-              cellArr.push(activeCell);
-          }
-      }
-      
-      this.setState({
-        activeCells: cellArr
-      });
+  setActiveCells = (length) => {
+      let cellArr = Array.from(Array(length).keys()).map(item => ++item);
+
+      return cellArr.sort(function() {
+                return Math.random() - 0.5
+             }).slice(0,2);
   };
+
   startNewGame = () => {
     if (this.state.start) return;
     
-    this.setState({
-      start: true,
-      cellCount: this.fieldSize
+    const cells = this.generateCells();
+    const activeCells = this.setActiveCells(this.state.cellCount);
+
+    console.log(activeCells);
+    cells.filter( (item) => {
+      if ( activeCells.includes(item.id) ) {
+        item.value = this.startedValue;
+      }
+      return cells;
     });
-    this.setActiveCells();
+
+    //console.log(cells);
+
+    this.setState((state) => {
+      return {
+        start: true,
+        cells: cells
+      }
+    });
   };
-  setCellState = (id) => {
-    console.log(id);
+
+  setCellState = (cell) => {
+    console.log( 'id: ', cell.id, 'value:', cell.value,  'position [',cell.row, ',', cell.column,']');
   }
+
   render() {
 
     const renderedComponent = this.state.start ? 

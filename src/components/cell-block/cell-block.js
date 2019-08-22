@@ -4,16 +4,12 @@ import './cell-block.css';
 
 const CellBlock = ({cellProps, setCellState}) => {
 
-    const { cells, activeCells } = cellProps;
+    const { cells } = cellProps;
     
-    console.log(cellProps);
+    console.log(cells);
     const cellItemList = cells.map((cell) => {
         let cellId =  cell.id;
-        if (activeCells.includes(cellId)) {
-            console.log('true');
-            //setValue();
-        }
-        //console.log(item.id)
+        //console.log(cell.value);
         return(
             <div 
                 className='cell-item-holder'
@@ -21,8 +17,8 @@ const CellBlock = ({cellProps, setCellState}) => {
                 <CellItem 
                     cellProps={cellProps}
                     activeItem={cellId}
-                    value={2}
-                    setCellState={() => setCellState(cellId)}/>
+                    cellValue={cell.value}
+                    setCellState={() => setCellState(cell)}/>
             </div>
         )
     });

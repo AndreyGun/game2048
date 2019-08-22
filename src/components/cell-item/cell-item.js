@@ -3,14 +3,14 @@ import './cell-item.css'
 
 const CellItem = (props) => {
 
-    const { cellProps, activeItem, value, setCellState } = props;
+    const { cellValue, setCellState } = props;
     
     let itemValue = null;
     let cellClass = 'cell-item';
-    //console.log(cellProps);
-    if (cellProps.activeCells.includes(activeItem)) {
-        cellClass += ' is-active value-' + value;
-        itemValue = value;
+    
+    if (cellValue !== null) {
+        cellClass += ' is-active value-' + cellValue;
+        itemValue = cellValue;
     }
     return(
         <div 
