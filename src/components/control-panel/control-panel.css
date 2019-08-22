@@ -1,0 +1,18 @@
+.control-panel {
+    display: grid;
+    grid-template-columns: 60px 60px 60px;
+    grid-auto-rows: 30px;
+    grid-gap: 2px;
+}
+.control-panel .btn {
+    border-radius: 4px;
+}
+.btn-top {
+    grid-column: 2/3;
+}
+.btn-right {
+    grid-row: 2/2;
+}
+.btn-bottom {
+    grid-column: 2/3;
+}

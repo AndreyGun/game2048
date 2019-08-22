@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CellBlock from '../cell-block';
 import GameTitle from '../game-title';
 import StartGame from '../start-game';
+import ControlPanel from '../control-panel';
 import './app.css';
 
 
@@ -83,6 +84,7 @@ export default class App  extends Component {
       <div>
         <GameTitle />
         {renderedComponent}
+        <ControlPanel />
       </div>
     );
   };
