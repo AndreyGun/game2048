@@ -58,7 +58,7 @@ export default class App  extends Component {
       }
       return cells;
     });
-
+    console.log(cells);
     this.setState((state) => {
       return {
         start: true,
@@ -69,6 +69,10 @@ export default class App  extends Component {
 
   setCellState = (cell) => {
     console.log( 'id: ', cell.id, 'value:', cell.value,  'position [',cell.row, ',', cell.column,']');
+    
+    this.setState({
+
+    });
   }
 
   render() {
