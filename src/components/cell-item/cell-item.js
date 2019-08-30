@@ -1,20 +1,20 @@
 import React from 'react';
 import './cell-item.css'
 
-const CellItem = (props) => {
+const CellItem = (cellProps) => {
 
-    const { cellValue, setCellState } = props;
+    const { cellValue, setCellState } = cellProps;
     
     let itemValue = null;
-    let cellClass = 'cell-item';
+    let cellClassName = 'cell-item';
     
     if (cellValue !== null) {
-        cellClass += ' is-active value-' + cellValue;
+        cellClassName += ' is-active value-' + cellValue;
         itemValue = cellValue;
     }
     return(
         <div 
-            className={cellClass}
+            className={cellClassName}
             onClick={ setCellState }>
             {itemValue}
         </div>

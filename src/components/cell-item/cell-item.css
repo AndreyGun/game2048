@@ -18,7 +18,14 @@
     line-height: 1;
     cursor: pointer;
 }
-.value-2 {
-    font-size: 30px;
-    background: purple;
-}
+.value-2 { font-size: 30px; background: purple; }
+.value-4 { font-size: 30px; background: orangered; }
+.value-8 { font-size: 30px; background: darkcyan; }
+.value-16 { font-size: 30px; background: greenyellow; }
+.value-32 {font-size: 30px; background: darkblue; }
+.value-64 {font-size: 30px; background: tomato; }
+.value-128 {font-size: 22px; background: goldenrod; }
+.value-256 {font-size: 22px; background: darkslateblue; }
+.value-512 {font-size: 22px; background: aquamarine; }
+.value-1024 {font-size: 18px; background: goldenrod; }
+.value-2048 {font-size: 18px; background: palevioletred; }
