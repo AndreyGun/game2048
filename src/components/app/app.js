@@ -23,7 +23,8 @@ export default class App  extends Component {
       value: null,
       id: this.startedId++,
       row: row,
-      column: column
+      column: column,
+      frozen: false
     }
   };
   generateCells() {
@@ -61,14 +62,10 @@ export default class App  extends Component {
   getActiveCellData = (cells, cellValue) => {
 
     const { activeCell } = this.state;
-
     const fillteredCells = cells.filter(cell => cell.value === null);
     const cellId = fillteredCells[ this.randomValue( fillteredCells.length ) ].id;
 
     if (!cellValue) cellValue = activeCell[ this.randomValue( activeCell.length )];
-
-    console.log(fillteredCells, ' fillteredCells');
-    console.log([ cellId, cellValue ], '  [ cellId, cellValue ]');
     return [ cellId, cellValue ];
   };
 
@@ -90,23 +87,78 @@ export default class App  extends Component {
     console.log( 'id: ', cell.id, 'value:', cell.value,  'position [',cell.row, ',', cell.column,']');
     
   };
-  compare = (row, column) => {
+  compareCells = (array) => {
+    for ( let first = 0; first <= array.length; first++ ) {
+      let second = first + 1;
+      if (!array[second]) return;
 
+      else if ( array[first].value === null) {
+        array[first].value = array[second].value;
+        array[second].value = null;
+      }
+      else if ( array[first].value === array[second].value) {
+        array[first].value *= 2;
+        array[second].value = null;
+      }
+    }
+    return array;
   }
-  detectEvent = (event) => {
+  compareArrays = (defaultArray, calculatedArray) => {
+    for ( let x = 0; x < defaultArray.length; x++ ) {
+      console.log(calculatedArray[x], ' calculatedArray[x]');
+      if (!calculatedArray[x]) {
+        defaultArray[x].value = null;
+      } else {
+        defaultArray[x].value  = calculatedArray[x].value;
+      }
+   }
+   console.log(defaultArray, '   defaultArray!');
+   return defaultArray;
+  }
+
+  keyEvent = (event) => {
+    let direction = event.target.dataset.direction;
+    return this.detectEvent(direction, this.state.cells);
+  }
+  arrayFilter = (array, direction) => {
+    let item1, item2, item3, item4;
+    
+    if (direction === 'row') {
+      item1 = array.filter(cell => cell.row === 1);
+      item2 = array.filter(cell => cell.row === 2);
+      item3 = array.filter(cell => cell.row === 3);
+      item4 = array.filter(cell => cell.row === 4);
+    } else {
+      item1 = array.filter(cell => cell.column === 1);
+      item2 = array.filter(cell => cell.column === 2);
+      item3 = array.filter(cell => cell.column === 3);
+      item4 = array.filter(cell => cell.column === 4);
+    }
+    return [item1, item2, item3, item4]
+  }
+
+  sortArrayById(array) {
+    array.sort(function(a, b) {
+        return parseFloat(a.id) - parseFloat(b.id);
+    });
+  }
+  
+  detectEvent = (event, array) => {
     switch (event) {
       case 'top':
         console.log('top');
-        // 4 array
-        // arr1 = [{row: 1, column: 1},
-              //   {row: 2, column: 1},
-              //   {row: 3, column: 1},
-              //   {row: 4, column: 1}
-              // ]
-        // arr2 = [ {row: 1, column: 2}, {row: 2, column: 2}, {row: 3, column: 2}, {row: 4, column: 2} ]
-        // arr3 = [ {row: 1, column: 3}, {row: 2, column: 3}, {row: 3, column: 3}, {row: 4, column: 3} ]
-        // arr4 = [ {row: 1, column: 4}, {row: 2, column: 4}, {row: 3, column: 4}, {row: 4, column: 4} ]
-        // 
+        let columns = this.arrayFilter(array);
+        console.log(columns[0], ' before compare 1');
+
+        let filtered = columns[0].filter(item => item.value !== null);
+        console.log(filtered, ' filtered');
+
+        this.compareCells(filtered);
+        console.log(columns[0], ' columns[0]!!!!');
+        console.log(filtered, ' filtered!!!!');
+        let zalupa = this.compareArrays(columns[0], filtered);
+        console.log(zalupa, 'zalupanus');
+
         break;
       case 'left':
         console.log('left');
@@ -116,6 +168,11 @@ export default class App  extends Component {
         break;
       case 'bottom':
         console.log('bottom');
+
+        this.setState({
+          cells: this.setValueInCell(this.state.cells, this.getActiveCellData(this.state.cells))
+        });
+
         break;
 
       default:
@@ -124,32 +181,6 @@ export default class App  extends Component {
   }
 
   render() {
-
-    const { cells } = this.state;
-
-    const events = {
-      eventTop: () => {
-        this.setState({
-          cells: this.setValueInCell(cells, this.getActiveCellData(cells))
-        });
-      },
-      eventBottom: () => {
-        this.setState({
-          cells: this.setValueInCell(cells, this.getActiveCellData(cells))
-        });
-      },
-      eventLeft: () => {
-        this.setState({
-          cells: this.setValueInCell(cells, this.getActiveCellData(cells))
-        });
-      },
-      eventRight: () => {
-        this.setState({
-          cells: this.setValueInCell(cells, this.getActiveCellData(cells))
-        });
-      }
-
-    }
     return (
       <div>
         <GameTitle />
@@ -159,7 +190,7 @@ export default class App  extends Component {
         <StartGame startNewGame={this.startNewGame}/>
         <ControlPanel 
           cellProps={this.state}
-          events={events} />
+          keyEvent={this.keyEvent} />
       </div>
     );
     

@@ -1,30 +1,30 @@
 import React from 'react';
 import './control-panel.css';
 
-const ControlPanel = ( { cellProps, events } ) => {
+const ControlPanel = ( { cellProps, keyEvent } ) => {
 
-    console.log(events, ' events');
+    //console.log(events, ' events');
     return(
         <div className='control-panel'>
             <button 
                 className='btn btn-top'
                 data-direction='top'
-                onClick={events.eventTop}>
+                onClick={keyEvent}>
                 &#8593;</button>
             <button 
                 className='btn btn-right'
                 data-direction='right'
-                onClick={events.eventRight}>
+                onClick={keyEvent}>
                 &#8594;</button>
             <button 
                 className='btn btn-bottom'
                 data-direction='bottom'
-                onClick={events.eventBottom}>
+                onClick={keyEvent}>
                 &#8595;</button>
             <button 
                 className='btn btn-left'
                 data-direction='left'
-                onClick={events.eventLeft}>
+                onClick={keyEvent}>
                 &#8592;</button>
         </div>
     );
