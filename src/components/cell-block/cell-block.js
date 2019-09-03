@@ -4,7 +4,7 @@ import './cell-block.css';
 
 const CellBlock = ({cellProps, setCellState}) => {
     
-    console.log(cellProps.cells, '   cell blocks ');
+    //console.log(cellProps.cells, '   cell blocks ');
 
     const cellItemList = cellProps.cells.map((cell) => {
         let cellId = cell.id;
